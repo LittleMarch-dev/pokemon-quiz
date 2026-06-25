@@ -394,7 +394,7 @@ export default function VgcReviewTrainer() {
           onClick={() => setShowDictionary(true)}
           className="w-full py-3 bg-neutral-800 border border-neutral-700/60 rounded-xl text-xs font-mono font-bold tracking-widest text-zinc-300 hover:bg-neutral-700 hover:text-white transition-all uppercase active:scale-98 cursor-pointer"
         >
-          Purchase Access: Read Matchup Story Guide
+          Read Matchup Story Guide
         </button>
 
         {/* MODAL WINDOW DICTIONARY JIKA DIKLIK */}
