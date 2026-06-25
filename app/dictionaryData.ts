@@ -1,0 +1,60 @@
+export const DEFENSE_STORY_GUIDE: Record<string, string> = {
+  'Fairy': 'Serangan FAIRY (sihir suci) akan melempem dan diredam dengan mudah oleh tameng besi (STEEL), racun (POISON), atau kobaran api (FIRE)!',
+  'Electric': 'Aliran ELECTRIC (daya listrik) akan otomatis bocor terserap bumi (GROUND), atau diredam oleh sesama listrik (ELECTRIC), naga (DRAGON), & tumbuhan (GRASS)!',
+  'Ground': 'Gempa bumi GROUND tidak akan menyentuh burung di langit (FLYING), serta diredam oleh serangga (BUG) dan lebatnya tumbuhan (GRASS)!',
+  'Dark': 'Taktik kotor penjahat DARK akan dipatahkan oleh kehormatan kesatria (FIGHTING), dongeng suci (FAIRY), atau sesama penjahat (DARK)!',
+  'Fire': 'Kobaran api FIRE akan langsung padam oleh air (WATER), batuan padat (ROCK), sisik naga (DRAGON), atau sesama elemen api (FIRE)!',
+  'Steel': 'Senjata besi STEEL akan tumpul menabrak air (WATER), setrum listrik (ELECTRIC), kobaran api (FIRE), atau tebalnya dinding baja (STEEL)!',
+  'Ghost': 'Teror hantu GHOST sama sekali tidak menyentuh dimensi fisik manusia (NORMAL) dan diredam oleh kegelapan (DARK)!',
+  'Grass': 'Serapan tumbuhan GRASS akan layu oleh api (FIRE), racun (POISON), senjata besi (STEEL), sayap burung (FLYING), naga (DRAGON), serangga (BUG), atau sesama (GRASS)!',
+  'Water': 'Siraman air WATER akan diserap oleh tumbuhan (GRASS), ditahan sisik naga (DRAGON), atau diredam oleh sesama air (WATER)!',
+  'Dragon': 'Amukan monster DRAGON hanya bisa ditahan oleh perisai besi (STEEL), dan sihir suci (FAIRY) sepenuhnya kebal dari naga!',
+  'Rock': 'Lemparan batu ROCK akan pecah menabrak otot petarung (FIGHTING), atau tameng besi (STEEL) yang tebal!',
+  'Psychic': 'Kekuatan pikiran PSYCHIC akan diredam oleh dinding baja (STEEL), atau dibaca oleh sesama kekuatan mental (PSYCHIC)!',
+  'Ice': 'Udara beku ICE akan mencair oleh kobaran api (FIRE), dibendung air (WATER), ditahan tameng besi (STEEL), atau sesama es (ICE)!',
+  'Fighting': 'Pukulan fisik FIGHTING akan diredam oleh racun (POISON), burung (FLYING), pikiran (PSYCHIC), serangga (BUG), atau sihir (FAIRY)!',
+  'Poison': 'Limbah beracun POISON akan diredam oleh tanah (GROUND), batuan (ROCK), hantu (GHOST), sesama racun (POISON), dan dinding besi (STEEL) benar-benar kebal!',
+  'Flying': 'Tusukan burung FLYING akan tertahan oleh tebalnya batuan (ROCK), dinding besi (STEEL), atau sengatan listrik (ELECTRIC)!',
+  'Bug': 'Gigitan serangga BUG akan diredam oleh otot petarung (FIGHTING), sayap burung (FLYING), racun (POISON), hantu (GHOST), besi (STEEL), api (FIRE), atau sihir (FAIRY)!'
+};
+
+export const ATTACK_STORY_GUIDE: Record<string, string> = {
+  'Ground': 'GROUND hancurkan baja (STEEL) & tiang listrik (ELECTRIC)!',
+  'Dark': 'DARK sukses meneror hantu (GHOST) & merusak mental (PSYCHIC)!',
+  'Fire': 'FIRE membakar habis alam (GRASS/BUG/ICE) & melelehkan besi (STEEL)!',
+  'Steel': 'STEEL itu senjata tajam pemotong ICE & ROCK, serta menebas peri (FAIRY)!',
+  'Ghost': 'GHOST bisa leluasa meneror sesama hantu (GHOST) & merusak mental (PSYCHIC)!',
+  'Grass': 'GRASS akarnya menjebol batu/tanah (ROCK/GROUND) & menyerap air (WATER)!',
+  'Water': 'WATER memadamkan kobaran FIRE & mengikis tanah/batu (GROUND/ROCK)!',
+  'Dragon': 'DRAGON itu monster legendaris yang hanya bisa ditumbangkan sesama DRAGON!',
+  'Rock': 'ROCK batunya menjatuhkan burung (FLYING), meremukkan BUG, dan memadamkan FIRE!',
+  'Psychic': 'PSYCHIC mengontrol fisik petarung (FIGHTING) & menetralisir racun (POISON)!',
+  'Electric': 'ELECTRIC paling cepat menyengat burung di langit (FLYING) & air (WATER)! Setruman super dobel (4x) bagi tipe kombinasi keduanya!',
+  'Fairy': 'FAIRY adalah sihir suci penakluk naga (DRAGON), petarung (FIGHTING) & kegelapan (DARK)!',
+  'Ice': 'ICE membekukan reptil (DRAGON), sayap burung (FLYING), rumput (GRASS), & tanah (GROUND)!',
+  'Fighting': 'FIGHTING bisa menghancurkan benda padat (ICE/ROCK/STEEL) & menghajar kejahatan (DARK)!',
+  'Poison': 'POISON merusak kesucian peri (FAIRY) & mematikan tanaman (GRASS)!',
+  'Flying': 'FLYING adalah predator bagi serangga (BUG) & tanaman (GRASS)!',
+  'Bug': 'BUG merusak tumbuhan (GRASS), menggigit pikiran (PSYCHIC), dan membasmi kejahatan (DARK)!'
+};
+
+export const POKEMON_TYPE_THEMES: Record<string, { bg: string; text: string; border: string; glow: string }> = {
+  GROUND: { bg: 'bg-amber-950/40', text: 'text-amber-500', border: 'border-amber-700/30', glow: 'shadow-amber-500/5' },
+  DARK: { bg: 'bg-neutral-900', text: 'text-neutral-400', border: 'border-neutral-700/40', glow: 'shadow-neutral-500/5' },
+  FIRE: { bg: 'bg-red-950/40', text: 'text-red-500', border: 'border-red-700/30', glow: 'shadow-red-500/5' },
+  STEEL: { bg: 'bg-slate-900/60', text: 'text-slate-300', border: 'border-slate-700/30', glow: 'shadow-slate-400/5' },
+  GHOST: { bg: 'bg-purple-950/40', text: 'text-purple-400', border: 'border-purple-700/30', glow: 'shadow-purple-500/5' },
+  GRASS: { bg: 'bg-emerald-950/40', text: 'text-emerald-500', border: 'border-emerald-700/30', glow: 'shadow-emerald-500/5' },
+  WATER: { bg: 'bg-blue-950/40', text: 'text-blue-400', border: 'border-blue-700/30', glow: 'shadow-blue-500/5' },
+  DRAGON: { bg: 'bg-indigo-950/40', text: 'text-indigo-400', border: 'border-indigo-700/30', glow: 'shadow-indigo-500/5' },
+  ROCK: { bg: 'bg-stone-900/60', text: 'text-stone-400', border: 'border-stone-700/30', glow: 'shadow-stone-500/5' },
+  PSYCHIC: { bg: 'bg-pink-950/40', text: 'text-pink-400', border: 'border-pink-700/30', glow: 'shadow-pink-500/5' },
+  ELECTRIC: { bg: 'bg-yellow-950/30', text: 'text-yellow-400', border: 'border-yellow-600/30', glow: 'shadow-yellow-400/5' },
+  FAIRY: { bg: 'bg-rose-950/40', text: 'text-rose-400', border: 'border-rose-700/30', glow: 'shadow-rose-400/5' },
+  ICE: { bg: 'bg-cyan-950/40', text: 'text-cyan-400', border: 'border-cyan-700/30', glow: 'shadow-cyan-400/5' },
+  FIGHTING: { bg: 'bg-orange-950/40', text: 'text-orange-500', border: 'border-orange-700/30', glow: 'shadow-orange-600/5' },
+  POISON: { bg: 'bg-fuchsia-950/40', text: 'text-fuchsia-400', border: 'border-fuchsia-700/30', glow: 'shadow-fuchsia-500/5' },
+  FLYING: { bg: 'bg-violet-950/30', text: 'text-violet-400', border: 'border-violet-700/30', glow: 'shadow-violet-400/5' },
+  BUG: { bg: 'bg-lime-950/30', text: 'text-lime-400', border: 'border-lime-700/30', glow: 'shadow-lime-500/5' },
+  NORMAL: { bg: 'bg-zinc-900', text: 'text-zinc-400', border: 'border-zinc-800', glow: 'shadow-zinc-500/5' }
+};

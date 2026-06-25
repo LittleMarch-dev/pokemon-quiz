@@ -2,12 +2,14 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { REG_M_META_POOL, INDIVIDUAL_TYPES, RESISTANCES } from './data';
+import VgcDictionary from './VgcDictionary';
 
 export default function VgcReviewTrainer() {
   const [scenarios, setScenarios] = useState<any[]>([]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isLaunching, setIsLaunching] = useState(false);
+  const [showDictionary, setShowDictionary] = useState(false);
 
   const [history, setHistory] = useState<Record<number, { selectedIdx: number; isCorrect: boolean }>>({});
   const [totalQuestions, setTotalQuestions] = useState<number | null>(null);
@@ -357,39 +359,52 @@ export default function VgcReviewTrainer() {
   };
 
   if (totalQuestions === null) {
-    return (
-      <div className="min-h-screen bg-zinc-950 text-zinc-200 flex items-center justify-center p-4">
-        <div className="w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-2xl text-center">
-          <div className="flex justify-between items-center mb-6 border-b border-neutral-800 pb-3 font-mono text-[10px] text-neutral-500">
-            <span>TACTICAL CONFIG CONTROL</span>
-            <span>BEST RUN: <b className="text-amber-400">{bestScore} WINS ({bestTime}s)</b></span>
-          </div>
-
-          <h1 className="text-2xl font-black tracking-wider text-white mb-1">VGC STRATEGY DRILL</h1>
-          <p className="text-xs font-mono text-neutral-400 mb-8 leading-relaxed">
-            Sistem rotasi lintas sesi aktif. Urutan Pokémon dijamin selalu berbeda dan berlanjut secara random di setiap sesi baru!
-          </p>
-
-          <div className="space-y-3 font-mono">
-            {[5, 10, 20].map((count) => (
-              <button
-                key={count}
-                disabled={isLaunching} 
-                onClick={() => startDrillSession(count)}
-                className={`w-full py-3.5 border border-neutral-800 rounded-xl text-xs font-black tracking-widest transition-all uppercase ${
-                  isLaunching 
-                    ? 'bg-zinc-900 text-zinc-600 border-zinc-950 cursor-not-allowed opacity-50' 
-                    : 'bg-zinc-950 text-zinc-400 hover:bg-neutral-800 hover:text-white active:scale-98 cursor-pointer'
-                }`}
-              >
-                {isLaunching ? '⚙️ LOADING QUEUE MATRIX...' : `⚡ Start ${count} Questions Queue`}
-              </button>
-            ))}
-          </div>
+  return (
+    <div className="min-h-screen bg-zinc-950 text-zinc-200 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-2xl text-center">
+        <div className="flex justify-between items-center mb-6 border-b border-neutral-800 pb-3 font-mono text-[10px] text-neutral-500">
+          <span>TACTICAL CONFIG CONTROL</span>
+          <span>BEST RUN: <b className="text-amber-400">{bestScore} WINS ({bestTime}s)</b></span>
         </div>
+
+        <h1 className="text-2xl font-black tracking-wider text-white mb-1">VGC STRATEGY DRILL</h1>
+        <p className="text-xs font-mono text-neutral-400 mb-8 leading-relaxed">
+          Sistem rotasi lintas sesi aktif. Urutan Pokémon dijamin selalu berbeda dan berlanjut secara random di setiap sesi baru!
+        </p>
+
+        <div className="space-y-3 font-mono mb-6">
+          {[5, 10, 20].map((count) => (
+            <button
+              key={count}
+              disabled={isLaunching} 
+              onClick={() => startDrillSession(count)}
+              className={`w-full py-3.5 border border-neutral-800 rounded-xl text-xs font-black tracking-widest transition-all uppercase ${
+                isLaunching 
+                  ? 'bg-zinc-900 text-zinc-600 border-zinc-950 cursor-not-allowed opacity-50' 
+                  : 'bg-zinc-950 text-zinc-400 hover:bg-neutral-800 hover:text-white active:scale-98 cursor-pointer'
+              }`}
+            >
+              {isLaunching ? '⚙️ LOADING QUEUE MATRIX...' : `⚡ Start ${count} Questions Queue`}
+            </button>
+          ))}
+        </div>
+
+        {/* TOMBOL MEMBUKA DICTIONARY YANG SUDAH TERPISAH */}
+        <button 
+          onClick={() => setShowDictionary(true)}
+          className="w-full py-3 bg-neutral-800 border border-neutral-700/60 rounded-xl text-xs font-mono font-bold tracking-widest text-zinc-300 hover:bg-neutral-700 hover:text-white transition-all uppercase active:scale-98 cursor-pointer"
+        >
+          Purchase Access: Read Matchup Story Guide
+        </button>
+
+        {/* MODAL WINDOW DICTIONARY JIKA DIKLIK */}
+        {showDictionary && (
+          <VgcDictionary onClose={() => setShowDictionary(false)} />
+        )}
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   if (loading) {
     return (
