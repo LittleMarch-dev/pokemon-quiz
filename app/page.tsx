@@ -8,6 +8,9 @@ export default function VgcReviewTrainer() {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [loading, setLoading] = useState(false);
   
+  // Anti-spam configuration lock flag
+  const [isLaunching, setIsLaunching] = useState(false);
+
   // Track answer histories mapped to navigate forward/backward
   const [history, setHistory] = useState<Record<number, { selectedIdx: number; isCorrect: boolean }>>({});
   const [totalQuestions, setTotalQuestions] = useState<number | null>(null);
@@ -41,7 +44,6 @@ export default function VgcReviewTrainer() {
       stopwatchRef.current = setInterval(() => {
         setTimeElapsed((prev) => prev + 1);
         
-        // Hanya hitung waktu jika pertanyaan aktif belum dijawab
         if (!history[currentIdx]) {
           setTimeForQuestion((prev) => {
             const nextTime = prev + 1;
@@ -58,7 +60,6 @@ export default function VgcReviewTrainer() {
     };
   }, [gameActive, loading, isFinished, currentIdx, history]);
 
-  // Fungsi untuk mengeliminasi 2 opsi yang salah sebagai Hint
   const triggerHint = () => {
     const currentQuestion = scenarios[currentIdx];
     if (!currentQuestion) return;
@@ -68,7 +69,6 @@ export default function VgcReviewTrainer() {
       if (!opt.isCorrect) wrongIndices.push(idx);
     });
 
-    // Acak dan ambil 2 indeks jawaban yang salah untuk dieliminasi
     const toEliminate = wrongIndices.sort(() => Math.random() - 0.5).slice(0, 2);
     setEliminatedIndices(toEliminate);
     setLog('💡 HINT ACTIVATED: 2 wrong answers eliminated due to time limit!');
@@ -92,7 +92,10 @@ export default function VgcReviewTrainer() {
   };
 
   const startDrillSession = async (questionCount: number) => {
+    if (isLaunching) return; // Mengabaikan klik spam jika aplikasi sedang loading data
+    setIsLaunching(true);
     setLoading(true);
+
     setTimeElapsed(0);
     setTimeForQuestion(0);
     setEliminatedIndices([]);
@@ -200,9 +203,11 @@ export default function VgcReviewTrainer() {
       setGameActive(true);
       setLog('Drill parameters configured successfully. Go!');
       setLoading(false);
+      setIsLaunching(false); 
     } catch (err) {
       console.error(err);
       setLoading(false);
+      setIsLaunching(false);
     }
   };
 
@@ -224,7 +229,6 @@ export default function VgcReviewTrainer() {
     
     if (currentIdx < totalQuestions - 1) {
       setCurrentIdx(prev => prev + 1);
-      // Reset timer pertanyaan dan hint untuk soal berikutnya
       setTimeForQuestion(0);
       setEliminatedIndices([]);
       setLog(history[currentIdx + 1] ? 'Reviewing historic parameters...' : 'Awaiting manual entry inputs...');
@@ -248,7 +252,6 @@ export default function VgcReviewTrainer() {
   const navigateBack = () => {
     if (currentIdx > 0) {
       setCurrentIdx(prev => prev - 1);
-      // Bersihkan hint state karena melihat kembali soal lama
       setEliminatedIndices([]);
       setLog('Reviewing historic parameters...');
     }
@@ -264,6 +267,7 @@ export default function VgcReviewTrainer() {
     setGameActive(false);
     setIsFinished(false);
     setTotalQuestions(null);
+    setIsLaunching(false);
     setLog('Select parameters to initialize match...');
   };
 
@@ -285,10 +289,15 @@ export default function VgcReviewTrainer() {
             {[5, 10, 20].map((count) => (
               <button
                 key={count}
+                disabled={isLaunching} 
                 onClick={() => startDrillSession(count)}
-                className="w-full py-3.5 bg-zinc-950 hover:bg-neutral-800 border border-neutral-800 rounded-xl text-xs font-black tracking-widest transition-all text-zinc-400 hover:text-white uppercase"
+                className={`w-full py-3.5 border border-neutral-800 rounded-xl text-xs font-black tracking-widest transition-all uppercase ${
+                  isLaunching 
+                    ? 'bg-zinc-900 text-zinc-600 border-zinc-950 cursor-not-allowed opacity-50' 
+                    : 'bg-zinc-950 text-zinc-400 hover:bg-neutral-800 hover:text-white active:scale-98 cursor-pointer'
+                }`}
               >
-                ⚡ Start {count} Questions Queue
+                {isLaunching ? '⚙️ LOADING QUEUE MATRIX...' : `⚡ Start {count} Questions Queue`}
               </button>
             ))}
           </div>
@@ -373,7 +382,6 @@ export default function VgcReviewTrainer() {
               else if (hasChosenThisOption) style = "bg-rose-950 text-rose-400 border-rose-600 font-bold";
               else style = "bg-zinc-950/20 text-zinc-600 border-zinc-900 opacity-20";
             } else if (isEliminated) {
-              // Menyembunyikan jawaban yang tereliminasi oleh hint
               style = "bg-zinc-900/30 text-zinc-700/40 border-zinc-950/40 opacity-20 pointer-events-none line-through";
             }
 
