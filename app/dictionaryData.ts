@@ -1,76 +1,118 @@
-// ==========================================
-// 1. KAMUS GABUNGAN MASTER COMBO (ALL-IN-ONE)
-// ==========================================
+
 export const COMBINED_MASTER_STORIES: Record<string, string> = {
-  'Steel': 'STEEL 💥menebas ROCK, ICE, FAIRY 🚫kebal POISON 🛡️menahan 10 tipe lain, tapi 🧪lemah dihantam FIRE, FIGHTING, dan gempa GROUND!',
-  'Ground': 'GROUND 💥mengubur ELECTRIC, FIRE, ROCK, POISON, STEEL 🚫kebal ELECTRIC, tapi 🧪lemah disiram WATER, dibekukan ICE, ditahan GRASS, dan 🕳️gagal menyentuh FLYING!',
-  'Flying': 'FLYING 💥memangsa BUG, FIGHTING, GRASS 🚫kebal GROUND 🛡️menahan BUG, FIGHTING, GRASS, tapi 🧪lemah dipanah ROCK, disengat ELECTRIC, atau dibekukan ICE!',
-  'Ghost': 'GHOST 💥menghantui sesama GHOST, PSYCHIC 🚫kebal NORMAL, FIGHTING 🛡️menahan POISON, BUG, tapi 🧪lemah diteror kegelapan DARK!',
-  'Dark': 'DARK 💥meneror GHOST, PSYCHIC 🚫kebal PSYCHIC 🛡️menahan GHOST, DARK, tapi 🧪lemah digeprek FIGHTING, digigit BUG, dan disihir FAIRY!',
-  'Fairy': 'FAIRY 💥menaklukan DRAGON, FIGHTING, DARK 🚫kebal DRAGON 🛡️menahan FIGHTING, BUG, DARK, tapi 🧪lemah dirusak POISON dan besi STEEL!',
-  'Fire': 'FIRE 💥membakar GRASS, BUG, ICE, STEEL 🛡️menahan FIRE, GRASS, ICE, BUG, STEEL, FAIRY, tapi 🧪lemah disiram WATER, dilempar ROCK, atau diguncang GROUND!',
-  'Water': 'WATER 💥mengikis GROUND, ROCK, FIRE 🛡️menahan FIRE, WATER, ICE, STEEL, tapi 🧪lemah diserap GRASS atau kesetrum ELECTRIC!',
-  'Grass': 'GRASS 💥menjebol ROCK, GROUND, WATER 🛡️menahan WATER, ELECTRIC, GRASS, GROUND, tapi 🧪lemah dibakar FIRE, diracun POISON, dipatuk FLYING, digigit BUG, atau dibekukan ICE!',
-  'Electric': 'ELECTRIC 💥menyengat FLYING, WATER 🛡️menahan ELECTRIC, FLYING, STEEL, tapi 🚫gagal total dan tidak berkutik menghadapi bumi GROUND!',
-  'Dragon': 'DRAGON 💥menghancurkan sesama DRAGON 🛡️menahan elemen dasar FIRE, WATER, GRASS, ELECTRIC, tapi 🧪lemah dibekukan ICE, dihajar DRAGON, dan 🚫gagal total melawan FAIRY!',
-  'Ice': 'ICE 💥membekukan DRAGON, FLYING, GRASS, GROUND 🛡️hanya menahan sesama ICE, tapi pertahanan 🧪sangat rapuh dihantam FIRE, FIGHTING, ROCK, STEEL!',
-  'Fighting': 'FIGHTING 💥menghancurkan STEEL, ROCK, ICE, NORMAL, DARK 🛡️menahan ROCK, BUG, DARK, tapi 🕳️tumpul lawan PSYCHIC, FAIRY, FLYING dan 🚫gagal total menyentuh GHOST!',
-  'Psychic': 'PSYCHIC 💥mengontrol FIGHTING, POISON 🛡️menahan FIGHTING, PSYCHIC, tapi pikiran 🧪langkah blank/fobia saat diteror BUG, GHOST, DARK!',
-  'Rock': 'ROCK 💥meremukkan FLYING, BUG, FIRE, ICE 🛡️menahan NORMAL, FIRE, POISON, FLYING, tapi 🧪lemah dikikis WATER, GRASS atau dihantam FIGHTING, STEEL, GROUND!',
-  'Poison': 'POISON 💥meracuni GRASS, FAIRY 🛡️menahan FIGHTING, POISON, BUG, GRASS, FAIRY, tapi 🚫gagal menyentuh STEEL dan 🧪lemah dihantam GROUND, PSYCHIC!',
-  'Normal': 'NORMAL 🧪tidak punya keunggulan elemen (💥) apa pun 🚫kebal total dari GHOST, tapi 🧪lemah digebuk pukulan fisik FIGHTING!',
-  'Bug': 'BUG 💥membasmi DARK, GRASS, PSYCHIC 🛡️menahan FIGHTING, GROUND, GRASS, tapi 🧪lemah terbakar FIRE, dipatok FLYING, atau digeprek ROCK!'
+  'Steel': '⚔️ ATTACK: Logam padat STEEL 💥hancurkan ROCK, ICE, FAIRY, namun serangannya 🛡️tertahan oleh FIRE, WATER, ELECTRIC, dan sesama STEEL.\n🛡️ DEFENSE: Ketika bertarung, STEEL 🧪luka fatal dari FIRE, GROUND, FIGHTING, tapi 🔀ditahan aman oleh NORMAL, GRASS, ICE, FLYING, PSYCHIC, BUG, ROCK, GHOST, DRAGON, STEEL, serta 🚫kebal total dari POISON.',
+  
+  'Ground': '⚔️ ATTACK: Tanah bumi GROUND 💥kubur FIRE, ELECTRIC, POISON, ROCK, STEEL, namun serangannya 🛡️tertahan oleh GRASS, BUG, dan 🚫gagal menyentuh FLYING.\n🛡️ DEFENSE: Ketika bertarung, GROUND 🧪luka fatal dari WATER, GRASS, ICE, tapi 🔀ditahan aman oleh POISON, ROCK, serta 🚫kebal total dari ELECTRIC.',
+  
+  'Flying': '⚔️ ATTACK: Kepakan sayap FLYING 💥mangsa BUG, FIGHTING, GRASS, namun serangannya 🛡️tertahan oleh ELECTRIC, ROCK, dan STEEL.\n🛡️ DEFENSE: Ketika bertarung, FLYING 🧪luka fatal dari ELECTRIC, ROCK, ICE, tapi 🔀ditahan aman oleh GRASS, FIGHTING, BUG, serta 🚫kebal total dari GROUND.',
+  
+  'Ghost': '⚔️ ATTACK: Kutukan gaib GHOST 💥hantui sesama GHOST, PSYCHIC, namun serangannya 🛡️tertahan oleh DARK, dan 🚫gagal menyentuh NORMAL.\n🛡️ DEFENSE: Ketika bertarung, GHOST 🧪luka fatal dari GHOST, DARK, tapi 🔀ditahan aman oleh POISON, BUG, serta 🚫kebal total dari NORMAL, FIGHTING.',
+  
+  'Fairy': '⚔️ ATTACK: Sihir suci FAIRY 💥tumpaskan FIGHTING, DRAGON, DARK, namun serangannya 🛡️tertahan oleh FIRE, POISON, dan STEEL.\n🛡️ DEFENSE: Ketika bertarung, FAIRY 🧪luka fatal dari POISON, STEEL, tapi 🔀ditahan aman oleh FIGHTING, BUG, DARK, serta 🚫kebal total dari DRAGON.',
+
+  'Normal': '⚔️ ATTACK: Hantaman biasa NORMAL tidak kuat pada apa pun, namun serangannya 🛡️tertahan oleh ROCK, STEEL, dan 🚫gagal menyentuh GHOST.\n🛡️ DEFENSE: Ketika bertarung, NORMAL 🧪luka fatal dari FIGHTING, namun 🚫kebal total dari gangguan GHOST.',
+  
+  'Poison': '⚔️ ATTACK: Limbah beracun POISON 💥racuni GRASS, FAIRY, namun serangannya 🛡️tertahan oleh 4 tipe dan 🚫gagal menyentuh STEEL.\n🛡️ DEFENSE: Ketika bertarung, POISON 🧪luka fatal dari GROUND, PSYCHIC, tapi 🔀ditahan aman oleh GRASS, FIGHTING, POISON, BUG, dan FAIRY.',
+
+  'Dark': '⚔️ ATTACK: Taktik kotor DARK 💥teror GHOST, PSYCHIC, namun serangannya 🛡️tertahan oleh FIGHTING, DARK, dan FAIRY.\n🛡️ DEFENSE: Ketika bertarung, DARK 🧪luka fatal dari FIGHTING, BUG, FAIRY, tapi 🔀ditahan aman oleh GHOST, DARK, serta 🚫kalis dari PSYCHIC.',
+  
+  'Fire': '⚔️ ATTACK: Kobaran api FIRE 💥bakar GRASS, ICE, BUG, STEEL, namun serangannya 🛡️tertahan oleh FIRE, WATER, ROCK, dan DRAGON.\n🛡️ DEFENSE: Ketika bertarung, FIRE 🧪luka fatal dari WATER, GROUND, ROCK, tapi 🔀ditahan aman oleh FIRE, GRASS, ICE, BUG, STEEL, dan FAIRY.',
+  
+  'Water': '⚔️ ATTACK: Semburan air WATER 💥kikis GROUND, ROCK, FIRE, namun serangannya 🛡️tertahan oleh WATER, GRASS, dan DRAGON.\n🛡️ DEFENSE: Ketika bertarung, WATER 🧪luka fatal dari ELECTRIC, GRASS, tapi 🔀ditahan aman oleh FIRE, WATER, ICE, dan STEEL.',
+  
+  'Grass': '⚔️ ATTACK: Lebatnya tanaman GRASS 💥serap WATER, GROUND, ROCK, namun serangannya 🛡️tertahan oleh 7 tipe termasuk FIRE dan DRAGON.\n🛡️ DEFENSE: Ketika bertarung, GRASS 🧪luka fatal dari FIRE, POISON, FLYING, BUG, ICE, tapi 🔀ditahan aman oleh WATER, ELECTRIC, GRASS, dan GROUND.',
+  
+  'Electric': '⚔️ ATTACK: Sengatan petir ELECTRIC 💥sambar FLYING, WATER, namun serangannya 🛡️tertahan oleh ELECTRIC, GRASS, DRAGON, dan 🚫gagal menyentuh GROUND.\n🛡️ DEFENSE: Ketika bertarung, ELECTRIC 🧪luka fatal dari GROUND, tapi 🔀ditahan aman oleh ELECTRIC, FLYING, dan STEEL.',
+
+  'Dragon': '⚔️ ATTACK: Amukan naga DRAGON 💥hancurkan sesama DRAGON, namun serangannya 🛡️tertahan oleh STEEL, dan 🚫gagal menyentuh FAIRY.\n🛡️ DEFENSE: Ketika bertarung, DRAGON 🧪luka fatal dari ICE, DRAGON, FAIRY, tapi 🔀ditahan aman oleh elemen dasar FIRE, WATER, GRASS, dan ELECTRIC.',
+  
+  'Ice': '⚔️ ATTACK: Hawa beku ICE 💥bekukan DRAGON, FLYING, GRASS, GROUND, namun serangannya 🛡️tertahan oleh FIRE, WATER, ICE, dan STEEL.\n🛡️ DEFENSE: Ketika bertarung, ICE 🧪luka fatal dari FIRE, FIGHTING, ROCK, STEEL, tapi 🔀hanya ditahan aman oleh sesama ICE.',
+  
+  'Fighting': '⚔️ ATTACK: Pukulan otot FIGHTING 💥hancurkan STEEL, ROCK, ICE, NORMAL, DARK, namun serangannya 🛡️tertahan oleh 5 tipe dan 🚫gagal menyentuh GHOST.\n🛡️ DEFENSE: Ketika bertarung, FIGHTING 🧪luka fatal dari FLYING, PSYCHIC, FAIRY, tapi 🔀ditahan aman oleh BUG, ROCK, dan DARK.',
+  
+  'Psychic': '⚔️ ATTACK: Kekuatan pikiran PSYCHIC 💥kontrol FIGHTING, POISON, namun serangannya 🛡️tertahan oleh PSYCHIC, STEEL, dan 🚫gagal menyentuh DARK.\n🛡️ DEFENSE: Ketika bertarung, PSYCHIC 🧪luka fatal dari BUG, GHOST, DARK, tapi 🔀ditahan aman oleh FIGHTING dan sesama PSYCHIC.',
+  
+  'Rock': '⚔️ ATTACK: Lemparan batu ROCK 💥remukkan FLYING, BUG, FIRE, ICE, namun serangannya 🛡️tertahan oleh FIGHTING, GROUND, dan STEEL.\n🛡️ DEFENSE: Ketika bertarung, ROCK 🧪luka fatal dari WATER, GRASS, FIGHTING, GROUND, STEEL, tapi 🔀ditahan aman oleh NORMAL, FIRE, POISON, FLYING.',
+
+  'Bug': '⚔️ ATTACK: Gigitan serangga BUG 💥gerogoti DARK, GRASS, PSYCHIC, namun serangannya 🛡️tertahan oleh 7 tipe termasuk FIRE dan STEEL.\n🛡️ DEFENSE: Ketika bertarung, BUG 🧪luka fatal dari FIRE, FLYING, ROCK, tapi 🔀ditahan aman oleh FIGHTING, GROUND, dan GRASS.'
 };
 
-// ==========================================
-// 2. KAMUS OFENSIF (HIT WEAKNESS ATTACK) - FIXED 18 TYPES
-// ==========================================
-// ==========================================
-// 2. KAMUS OFENSIF (HIT WEAKNESS ATTACK)
-// ==========================================
+
 export const ATTACK_STORY_GUIDE: Record<string, string> = {
-  'Steel': 'STEEL itu senjata tajam 💥pemotong ICE & ROCK, serta 💥menebas peri FAIRY!',
-  'Ground': 'GROUND 💥menghancurkan baja STEEL & tiang listrik ELECTRIC, serta 💥mengubur FIRE, ROCK, dan POISON!',
-  'Flying': 'FLYING adalah predator terbang yang 💥memangsa serangga BUG & tanaman GRASS!',
-  'Ghost': 'GHOST bisa leluasa 💥meneror sesama hantu GHOST & 💥merusak mental PSYCHIC!',
-  'Dark': 'DARK sukses 💥meneror hantu GHOST & 💥merusak mental kompetitif PSYCHIC!',
-  'Fairy': 'FAIRY adalah sihir suci 💥penakluk naga DRAGON, petarung FIGHTING & kegelapan DARK!',
-  'Fire': 'FIRE 💥membakar habis alam GRASS, BUG, ICE & 💥melelehkan pelindung besi STEEL!',
-  'Water': 'WATER 💥memadamkan kobaran FIRE & 💥mengikis hancur tanah GROUND atau batuan ROCK!',
-  'Grass': 'GRASS akarnya 💥menjebol batu ROCK, tanah GROUND & 💥menyerap habis energi air WATER!',
-  'Electric': 'ELECTRIC paling cepat 💥menyengat burung di langit FLYING & air WATER! Setruman super dobel (4x) bagi kombinasi keduanya!',
-  'Dragon': 'DRAGON itu monster legendaris yang hanya bisa 💥ditumbangkan oleh sesama kekuatan purba DRAGON!',
-  'Ice': 'ICE 💥membekukan reptil DRAGON, sayap burung FLYING, rumput GRASS, & tanah GROUND!',
-  'Fighting': 'FIGHTING bisa 💥menghancurkan benda padat ICE, ROCK, STEEL, NORMAL & 💥menghajar kejahatan DARK!',
-  'Psychic': 'PSYCHIC 💥mengontrol disiplin fisik petarung FIGHTING & 💥menetralisir cairan beracun POISON!',
-  'Rock': 'ROCK batunya 💥menjatuhkan burung FLYING, 💥meremukkan BUG, dan 💥memadamkan kobaran FIRE atau ICE!',
-  'Poison': 'POISON 💥merusak kesucian peri FAIRY & 💥mematikan jaringan sel tanaman GRASS!',
-  'Normal': 'NORMAL 🧪tidak memiliki keunggulan elemen (💥) terhadap tipe apa pun. Fokus murni pada raw damage output!',
-  'Bug': 'BUG 💥merusak jaringan tumbuhan GRASS, 💥menggigit pikiran PSYCHIC, dan 💥membasmi kejahatan DARK!'
+  'Steel': 'Logam padat STEEL 💥mampu memecahkan ROCK, ICE, dan merusak keajaiban mitologi FAIRY, namun serangannya 🛡️tertahan oleh FIRE, WATER, ELECTRIC, dan sesama STEEL.',
+  
+  'Ground': 'Tanah bumi GROUND 💥mampu menimbun FIRE, menyerap ELECTRIC, mengubur POISON, memecahkan ROCK, dan STEEL, namun serangannya 🛡️tertahan oleh GRASS, BUG, dan 🚫gagal menyentuh FLYING.',
+  
+  'Flying': 'Kepakan sayap FLYING 💥mampu memangsa BUG, menghancurkan tanaman GRASS, dan menumbangkan petarung FIGHTING, namun serangannya 🛡️tertahan oleh ELECTRIC, ROCK, dan STEEL.',
+  
+  'Ghost': 'Kutukan gaib GHOST 💥mampu menghantui sesama GHOST dan melumpuhkan pikiran PSYCHIC (fobia manusia), namun serangannya 🛡️tertahan oleh kegelapan DARK, dan 🚫gagal menyentuh tubuh fisik NORMAL.',
+  
+  'Dark': 'Taktik kotor penjahat DARK 💥mampu meneror roh GHOST dan mengacaukan pikiran PSYCHIC (sosiopat kejam), namun serangannya 🛡️tertahan oleh kehormatan FIGHTING, sesama DARK, dan sihir FAIRY.',
+  
+  'Fairy': 'Sihir suci FAIRY 💥mampu menumpaskan otot petarung FIGHTING, kegelapan DARK, dan amukan naga DRAGON, namun serangannya 🛡️tertahan oleh kobaran FIRE, racun POISON, dan tebasan logam dingin STEEL.',
+
+  'Normal': 'Hantaman polos NORMAL 🧪tidak memiliki keunggulan ofensif berdaya hancur terhadap elemen apa pun, bahkan serangannya 🛡️tertahan oleh ROCK, STEEL, dan 🚫gagal menyentuh tubuh gaib GHOST.',
+  
+  'Poison': 'Limbah beracun POISON 💥mampu meracuni tumbuhan GRASS dan merusak kesucian magik FAIRY dengan zat toksik, namun serangannya 🛡️tertahan oleh POISON, GROUND, ROCK, GHOST, dan 🚫gagal menembus tangki baja STEEL.',
+  
+  'Fire': 'Kobaran api FIRE 💥mampu membakar hutan GRASS, mencairkan ICE, memanggang serangga BUG, dan melelehkan baja tebal STEEL, namun serangannya 🛡️tertahan oleh sesama FIRE, WATER, ROCK, dan ketahanan DRAGON.',
+  
+  'Water': 'Semburan air WATER 💥mampu memadamkan api FIRE, mengikis tanah GROUND, dan menghancurkan batuan ROCK secara instan, namun serangannya 🛡️tertahan oleh sesama WATER, serapan akar GRASS, dan kulit tebal DRAGON.',
+  
+  'Grass': 'Lebatnya tanaman GRASS 💥mampu menyerap air WATER, menghisap nutrisi tanah GROUND, dan memecahkan batuan ROCK dengan akarnya, namun serangannya 🛡️tertahan oleh FIRE, GRASS, POISON, FLYING, BUG, DRAGON, dan STEEL.',
+  
+  'Electric': 'Sengatan petir ELECTRIC 💥mampu menyambar burung FLYING di langit dan menyengat hidupan akuatik di dalam air WATER, namun serangannya 🛡️tertahan oleh sesama ELECTRIC, GRASS, DRAGON, dan 🚫gagal menyentuh tanah GROUND.',
+
+  'Dragon': 'Amukan raksasa DRAGON 💥mampu menghancurkan sesama naga DRAGON karena hanya kekuatan purba yang setara yang bisa menandinginya, namun serangannya 🛡️tertahan oleh tameng STEEL, dan 🚫gagal menyentuh magik murni FAIRY.',
+  
+  'Ice': 'Hawa beku ICE 💥mampu merusak sayap FLYING, membekukan GRASS, mengikis tanah GROUND, dan mematikan reptilia berdarah sejuk DRAGON, namun serangannya 🛡️tertahan oleh FIRE, WATER, sesama ICE, dan logam STEEL.',
+  
+  'Fighting': 'Pukulan otot FIGHTING 💥mampu menghancurkan tameng logam STEEL, batuan ROCK, blok ICE, orang biasa NORMAL, dan penjahat licik DARK, namun serangannya 🛡️tertahan oleh POISON, FLYING, PSYCHIC, BUG, FAIRY, dan 🚫gagal menyentuh hantu GHOST.',
+  
+  'Psychic': 'Kekuatan pikiran PSYCHIC 💥mampu mengontrol otot kasar FIGHTING dan melawan penyakit POISON (korelasi mental-fisik), namun serangannya 🛡️tertahan oleh sesama PSYCHIC, dinding STEEL, dan 🚫gagal menembus kegelapan sosiopat DARK.',
+  
+  'Rock': 'Lemparan batu ROCK 💥mampu meremukkan sayap FLYING, menghancurkan serangga BUG, memadamkan kobaran FIRE, dan memecahkan blok ICE rapuh, namun serangannya 🛡️tertahan oleh kekuatan otot FIGHTING, tanah GROUND, dan beliung besi STEEL.',
+  
+  'Bug': 'Gigitan serangga BUG 💥mampu menggerogoti tanaman GRASS, memicu ketakutan fobia PSYCHIC, dan menumpas kejahatan tipe DARK layaknya pahlawan, namun serangannya 🛡️tertahan oleh FIRE, FIGHTING, POISON, FLYING, GHOST, STEEL, dan FAIRY.'
 };
 
-// ==========================================
-// 3. KAMUS DEFENSIF (PIVOT ABSORBER)
-// ==========================================
+
 export const DEFENSE_STORY_GUIDE: Record<string, string> = {
-  'Steel': 'Tameng besi STEEL 🛡️menahan 10 tipe elemen berbeda dan 🚫kebal total dari cairan limbah beracun POISON!',
-  'Ground': 'Bumi GROUND 🚫kebal dari aliran listrik ELECTRIC, serta 🛡️meredam ledakan pasir ROCK dan racun POISON!',
-  'Flying': 'Burung FLYING bebas terbang tinggi sehingga 🚫kebal dari gempa bumi GROUND, serta 🛡️menahan serangan BUG, FIGHTING, GRASS!',
-  'Ghost': 'Dimensi gaib GHOST 🚫kebal total dari fisik NORMAL dan otot FIGHTING, serta 🛡️menahan racun POISON dan gigitan BUG!',
-  'Dark': 'Sisi gelap DARK 🚫kebal dari manipulasi otak PSYCHIC, serta 🛡️menahan teror mistis GHOST dan sesama penjahat DARK!',
-  'Fairy': 'Sihir suci FAIRY 🚫kebal total dari amukan naga DRAGON, serta 🛡️meredam pukulan FIGHTING, BUG, dan kegelapan DARK!',
-  'Fire': 'Kobaran FIRE 🛡️menahan hawa beku ICE, tebasan STEEL, sihir FAIRY, gigitan BUG, tumbuhan GRASS, dan sesama kobaran api FIRE!',
-  'Water': 'Aliran air WATER 🛡️meredam ledakan api FIRE, menghentikan beku ICE, menahan tebasan STEEL, dan sesama siraman air WATER!',
-  'Grass': 'Tanaman GRASS 🛡️menyerap aliran sengatan ELECTRIC, menyedot air WATER, menahan guncangan GROUND, dan sesama tumbuhan GRASS!',
-  'Electric': 'Daya ELECTRIC 🛡️menahan sengatan sesama petir ELECTRIC, menepis sayap terbang FLYING, dan meredam ketukan besi STEEL!',
-  'Dragon': 'Sisik naga DRAGON 🛡️menahan empat elemen dasar alam sekaligus yaitu FIRE, WATER, GRASS, dan sengatan listrik ELECTRIC!',
-  'Ice': 'Lapisan es ICE sangat rapuh dan 🛡️hanya bisa menahan dinginnya sisa serangan dari sesama udara beku ICE!',
-  'Fighting': 'Disiplin bela diri FIGHTING 🛡️menahan lemparan batuan ROCK, gigitan serangga BUG, dan taktik kotor penjahat DARK!',
-  'Psychic': 'Kekuatan mental PSYCHIC 🛡️membaca gerakan pukulan petarung FIGHTING dan meredam sesama gelombang pikiran PSYCHIC!',
-  'Rock': 'Struktur batuan ROCK 🛡️menahan hantaman fisik NORMAL, kobaran api FIRE, racun POISON, dan patukan burung FLYING!',
-  'Poison': 'Tubuh beracun POISON 🛡️menahan pukulan bela diri FIGHTING, gigitan BUG, tumbuhan GRASS, sihir FAIRY, dan sesama racun POISON!',
-  'Normal': 'Tubuh polos NORMAL 🚫kebal dari dimensi spiritual hantu GHOST, tetapi 🧪lemah dihantam oleh disiplin bela diri FIGHTING!',
-  'Bug': 'Tubuh serangga BUG 🛡️meredam pukulan otot petarung FIGHTING, guncangan tanah GROUND, dan jeratan tanaman GRASS!'
+  'Steel': 'Ketika bertarung, STEEL 🧪luka fatal dihantam kobaran FIRE yang mencairkannya, gempa GROUND yang mengikisnya, atau kekuatan fisik FIGHTING, tapi 🔀mampu meredam hantaman polos NORMAL, serapan GRASS, hawa beku ICE, kepakan FLYING, pikiran PSYCHIC, gigitan BUG, lemparan ROCK, kutukan GHOST, amukan DRAGON, sesama STEEL karena materialnya yang luar biasa keras, serta 🚫kebal total dari limbah POISON yang disimpan aman dalam tangki baja.',
+  
+  'Ground': 'Ketika bertarung, GROUND 🧪luka fatal akibat hakisan air WATER, es ICE, atau tanaman GRASS yang menghisap nutrisinya hingga kering kontang, tapi 🔀mampu meredam zat toksik POISON dan lemparan batuan ROCK karena tanah bumi bisa menimbunnya dengan mudah, serta 🚫kebal total dari sengatan ELECTRIC melalui sistem pembumian bumi.',
+  
+  'Flying': 'Ketika bertarung, FLYING 🧪luka fatal dari tembakan ELECTRIC, ketukan ROCK, atau sayap dibekukan ICE, tapi 🔀mampu meredam rimbunnya tanaman GRASS, otot karate FIGHTING, dan gigitan serangga BUG karena posisi burung yang mendominasi dari langit, serta 🚫kebal total dari gempa bumi GROUND karena terbang bebas di udara.',
+  
+  'Ghost': 'Ketika bertarung, GHOST 🧪luka fatal dari sesama roh GHOST atau dendam kegelapan DARK, tapi 🔀mampu meredam zat toksik POISON dan gigitan serangga BUG karena racun dan hama tidak berefek pada makhluk mati, serta 🚫kebal total dari NORMAL dan FIGHTING karena serangan fisik manusia tidak bisa menyentuh makhluk halus.',
+  
+  'Dark': 'Ketika bertarung, DARK 🧪luka fatal dari kehormatan jagoan FIGHTING, sihir suci FAIRY, atau gigitan BUG layaknya pahlawan menumpas penjahat, tapi 🔀mampu meredam teror roh GHOST dan taktik licik sesama DARK karena kegelapan tidak takut pada kegelapan, serta 🚫kebal total dari PSYCHIC karena sosiopat kejam tak bisa dimanipulasi pikiran.',
+  
+  'Fairy': 'Ketika bertarung, FAIRY 🧪luka fatal dari limbah POISON yang merusak kesucian peri atau tebasan besi dingin STEEL dalam mitologi, tapi 🔀mampu meredam pukulan otot FIGHTING, gigitan serangga BUG, dan teror penjahat DARK karena sihir kebaikan selalu menang melawan kejahatan kasar, serta 🚫kebal total dari DRAGON karena sihir magik peri menidakkan amukan naga.',
+
+  'Normal': 'Ketika bertarung, NORMAL 🧪luka fatal dihajar petarung MMA profesional FIGHTING yang mengalahkan orang awam, namun 🚫kebal total dari gangguan hantu GHOST karena makhluk hidup dan hantu berada di dimensi berbeda sehingga tidak bisa saling menyentuh.',
+  
+  'Poison': 'Ketika bertarung, POISON 🧪luka fatal dari sumbatan tanah GROUND atau pikiran PSYCHIC yang mengontrol kesembuhan fisik, tapi 🔀mampu meredam tanaman GRASS, hantaman otot FIGHTING, cairan sesama POISON, gigitan BUG, dan sihir FAIRY karena zat toksik beracun mampu mengasimilasi serangan organik tersebut, serta 🚫kebal total dari tangki baja STEEL yang menampung racun.',
+  
+  'Fire': 'Ketika bertarung, FIRE 🧪luka fatal disiram air WATER, ditimbun tanah GROUND, atau disekat batuan ROCK yang menghentikan penyebaran titik apinya, tapi 🔀mampu meredam panasnya sesama FIRE, lebatnya tanaman GRASS, hawa beku ICE, gigitan BUG, tameng baja STEEL, dan sihir FAIRY karena semuanya justru menjadi bahan bakar bagi kobaran api.',
+  
+  'Water': 'Ketika bertarung, WATER 🧪luka fatal karena akar tanaman GRASS menyedotnya atau sengatan kilat ELECTRIC menyetrum zat mineral di dalamnya, tapi 🔀mampu meredam panasnya api FIRE, dinginnya es ICE, tebasan baja STEEL, dan cipratan sesama WATER karena benda cair hanya menyerap objek tersebut tanpa terluka fisik.',
+  
+  'Grass': 'Ketika bertarung, GRASS 🧪luka fatal dibakar FIRE, diracun rumpai POISON, dipatuk FLYING, digerogoti hama BUG, atau mati membeku dihantam ICE, tapi 🔀mampu meredam kelembapan air WATER, sengatan kilat ELECTRIC (kayu konduktor buruk), pertumbuhan sesama GRASS, dan sumbatan tanah GROUND.',
+  
+  'Electric': 'Ketika bertarung, ELECTRIC 🧪luka fatal dari tanah bumi GROUND yang langsung meneutralkannya, tapi 🔀mampu meredam sengatan sesama ELECTRIC, kelincahan burung FLYING, dan hantaman logam STEEL karena listrik mengalir bebas melewati material konduktor tersebut.',
+
+  'Dragon': 'Ketika bertarung, DRAGON 🧪luka fatal dihantam hawa beku ICE karena naga berdarah sejuk tak tahan dingin, sesama naga DRAGON, atau magik FAIRY, tapi 🔀mampu meredam elemen dasar alam seperti kobaran FIRE, aliran WATER, rimbunnya GRASS, dan sengatan ELECTRIC karena naga purba kalis dari kekuatan alam biasa.',
+  
+  'Ice': 'Ketika bertarung, ICE 🧪luka fatal dicairkan kobaran FIRE, dihancurkan otot karate FIGHTING, digeprek ROCK, atau dipahat baja STEEL yang lebih keras dari balok es, tapi 🔀mampu meredam hawa dingin sesama ICE karena tumpukan es hanya akan menciptakan lapisan es yang lebih tebal.',
+  
+  'Fighting': 'Ketika bertarung, FIGHTING 🧪luka fatal dari kelincahan udara FLYING, sihir magik FAIRY, atau kepintaran otak nerd PSYCHIC yang membuktikan brains over brawn, tapi 🔀mampu meredam gigitan serangga BUG, lemparan batuan ROCK, dan teror penjahat DARK karena ahli bela diri dilatih menahan benturan fisik dan mental.',
+  
+  'Psychic': 'Ketika bertarung, PSYCHIC 🧪luka fatal saat fobia menghadapi ketakutan terbesar pikiran manusia yaitu serangga BUG, roh hantu GHOST, atau teror kegelapan DARK, tapi 🔀mampu meredam otot kasar FIGHTING dan sesama kekuatan pikiran PSYCHIC karena gelombang otak mampu memprediksi gerakan fisik.',
+  
+  'Rock': 'Ketika bertarung, ROCK 🧪luka fatal dari hakisan air WATER, retakan akar GRASS, gempa bumi GROUND, belahan karate FIGHTING, atau jentera beliung besi STEEL, tapi 🔀mampu meredam hantaman polos NORMAL, kobaran api FIRE, zat beracun POISON, dan paruh burung FLYING karena material batu terlalu keras ditembus zat tersebut.',
+  
+  'Bug': 'Ketika bertarung, BUG 🧪luka fatal jika dibakar kobaran FIRE, dimangsa paruh burung FLYING, atau dipenyek menggunakan lemparan batu keras ROCK, tapi 🔀mampu meredam otot petarung FIGHTING, tanah bumi GROUND, dan rimbunnya tanaman GRASS karena serangga kecil terbiasa hidup merayap di dalam ekosistem alam.'
 };
 
 // ==========================================
