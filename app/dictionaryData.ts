@@ -1,42 +1,87 @@
-export const DEFENSE_STORY_GUIDE: Record<string, string> = {
-  'Fairy': 'Serangan FAIRY (sihir suci) akan melempem dan diredam dengan mudah oleh tameng besi (STEEL), racun (POISON), atau kobaran api (FIRE)!',
-  'Electric': 'Aliran ELECTRIC (daya listrik) akan otomatis bocor terserap bumi (GROUND), atau diredam oleh sesama listrik (ELECTRIC), naga (DRAGON), & tumbuhan (GRASS)!',
-  'Ground': 'Gempa bumi GROUND tidak akan menyentuh burung di langit (FLYING), serta diredam oleh serangga (BUG) dan lebatnya tumbuhan (GRASS)!',
-  'Dark': 'Taktik kotor penjahat DARK akan dipatahkan oleh kehormatan kesatria (FIGHTING), dongeng suci (FAIRY), atau sesama penjahat (DARK)!',
-  'Fire': 'Kobaran api FIRE akan langsung padam oleh air (WATER), batuan padat (ROCK), sisik naga (DRAGON), atau sesama elemen api (FIRE)!',
-  'Steel': 'Senjata besi STEEL akan tumpul menabrak air (WATER), setrum listrik (ELECTRIC), kobaran api (FIRE), atau tebalnya dinding baja (STEEL)!',
-  'Ghost': 'Teror hantu GHOST sama sekali tidak menyentuh dimensi fisik manusia (NORMAL) dan diredam oleh kegelapan (DARK)!',
-  'Grass': 'Serapan tumbuhan GRASS akan layu oleh api (FIRE), racun (POISON), senjata besi (STEEL), sayap burung (FLYING), naga (DRAGON), serangga (BUG), atau sesama (GRASS)!',
-  'Water': 'Siraman air WATER akan diserap oleh tumbuhan (GRASS), ditahan sisik naga (DRAGON), atau diredam oleh sesama air (WATER)!',
-  'Dragon': 'Amukan monster DRAGON hanya bisa ditahan oleh perisai besi (STEEL), dan sihir suci (FAIRY) sepenuhnya kebal dari naga!',
-  'Rock': 'Lemparan batu ROCK akan pecah menabrak otot petarung (FIGHTING), atau tameng besi (STEEL) yang tebal!',
-  'Psychic': 'Kekuatan pikiran PSYCHIC akan diredam oleh dinding baja (STEEL), atau dibaca oleh sesama kekuatan mental (PSYCHIC)!',
-  'Ice': 'Udara beku ICE akan mencair oleh kobaran api (FIRE), dibendung air (WATER), ditahan tameng besi (STEEL), atau sesama es (ICE)!',
-  'Fighting': 'Pukulan fisik FIGHTING akan diredam oleh racun (POISON), burung (FLYING), pikiran (PSYCHIC), serangga (BUG), atau sihir (FAIRY)!',
-  'Poison': 'Limbah beracun POISON akan diredam oleh tanah (GROUND), batuan (ROCK), hantu (GHOST), sesama racun (POISON), dan dinding besi (STEEL) benar-benar kebal!',
-  'Flying': 'Tusukan burung FLYING akan tertahan oleh tebalnya batuan (ROCK), dinding besi (STEEL), atau sengatan listrik (ELECTRIC)!',
-  'Bug': 'Gigitan serangga BUG akan diredam oleh otot petarung (FIGHTING), sayap burung (FLYING), racun (POISON), hantu (GHOST), besi (STEEL), api (FIRE), atau sihir (FAIRY)!'
+// ==========================================
+// 1. KAMUS GABUNGAN MASTER COMBO (ALL-IN-ONE)
+// ==========================================
+export const COMBINED_MASTER_STORIES: Record<string, string> = {
+  'Steel': 'STEEL 💥menebas ROCK, ICE, FAIRY 🚫kebal POISON 🛡️menahan 10 tipe lain, tapi 🧪lemah dihantam FIRE, FIGHTING, dan gempa GROUND!',
+  'Ground': 'GROUND 💥mengubur ELECTRIC, FIRE, ROCK, POISON, STEEL 🚫kebal ELECTRIC, tapi 🧪lemah disiram WATER, dibekukan ICE, ditahan GRASS, dan 🕳️gagal menyentuh FLYING!',
+  'Flying': 'FLYING 💥memangsa BUG, FIGHTING, GRASS 🚫kebal GROUND 🛡️menahan BUG, FIGHTING, GRASS, tapi 🧪lemah dipanah ROCK, disengat ELECTRIC, atau dibekukan ICE!',
+  'Ghost': 'GHOST 💥menghantui sesama GHOST, PSYCHIC 🚫kebal NORMAL, FIGHTING 🛡️menahan POISON, BUG, tapi 🧪lemah diteror kegelapan DARK!',
+  'Dark': 'DARK 💥meneror GHOST, PSYCHIC 🚫kebal PSYCHIC 🛡️menahan GHOST, DARK, tapi 🧪lemah digeprek FIGHTING, digigit BUG, dan disihir FAIRY!',
+  'Fairy': 'FAIRY 💥menaklukan DRAGON, FIGHTING, DARK 🚫kebal DRAGON 🛡️menahan FIGHTING, BUG, DARK, tapi 🧪lemah dirusak POISON dan besi STEEL!',
+  'Fire': 'FIRE 💥membakar GRASS, BUG, ICE, STEEL 🛡️menahan FIRE, GRASS, ICE, BUG, STEEL, FAIRY, tapi 🧪lemah disiram WATER, dilempar ROCK, atau diguncang GROUND!',
+  'Water': 'WATER 💥mengikis GROUND, ROCK, FIRE 🛡️menahan FIRE, WATER, ICE, STEEL, tapi 🧪lemah diserap GRASS atau kesetrum ELECTRIC!',
+  'Grass': 'GRASS 💥menjebol ROCK, GROUND, WATER 🛡️menahan WATER, ELECTRIC, GRASS, GROUND, tapi 🧪lemah dibakar FIRE, diracun POISON, dipatuk FLYING, digigit BUG, atau dibekukan ICE!',
+  'Electric': 'ELECTRIC 💥menyengat FLYING, WATER 🛡️menahan ELECTRIC, FLYING, STEEL, tapi 🚫gagal total dan tidak berkutik menghadapi bumi GROUND!',
+  'Dragon': 'DRAGON 💥menghancurkan sesama DRAGON 🛡️menahan elemen dasar FIRE, WATER, GRASS, ELECTRIC, tapi 🧪lemah dibekukan ICE, dihajar DRAGON, dan 🚫gagal total melawan FAIRY!',
+  'Ice': 'ICE 💥membekukan DRAGON, FLYING, GRASS, GROUND 🛡️hanya menahan sesama ICE, tapi pertahanan 🧪sangat rapuh dihantam FIRE, FIGHTING, ROCK, STEEL!',
+  'Fighting': 'FIGHTING 💥menghancurkan STEEL, ROCK, ICE, NORMAL, DARK 🛡️menahan ROCK, BUG, DARK, tapi 🕳️tumpul lawan PSYCHIC, FAIRY, FLYING dan 🚫gagal total menyentuh GHOST!',
+  'Psychic': 'PSYCHIC 💥mengontrol FIGHTING, POISON 🛡️menahan FIGHTING, PSYCHIC, tapi pikiran 🧪langkah blank/fobia saat diteror BUG, GHOST, DARK!',
+  'Rock': 'ROCK 💥meremukkan FLYING, BUG, FIRE, ICE 🛡️menahan NORMAL, FIRE, POISON, FLYING, tapi 🧪lemah dikikis WATER, GRASS atau dihantam FIGHTING, STEEL, GROUND!',
+  'Poison': 'POISON 💥meracuni GRASS, FAIRY 🛡️menahan FIGHTING, POISON, BUG, GRASS, FAIRY, tapi 🚫gagal menyentuh STEEL dan 🧪lemah dihantam GROUND, PSYCHIC!',
+  'Normal': 'NORMAL 🧪tidak punya keunggulan elemen (💥) apa pun 🚫kebal total dari GHOST, tapi 🧪lemah digebuk pukulan fisik FIGHTING!',
+  'Bug': 'BUG 💥membasmi DARK, GRASS, PSYCHIC 🛡️menahan FIGHTING, GROUND, GRASS, tapi 🧪lemah terbakar FIRE, dipatok FLYING, atau digeprek ROCK!'
 };
 
+// ==========================================
+// 2. KAMUS OFENSIF (HIT WEAKNESS ATTACK) - FIXED 18 TYPES
+// ==========================================
+// ==========================================
+// 2. KAMUS OFENSIF (HIT WEAKNESS ATTACK)
+// ==========================================
 export const ATTACK_STORY_GUIDE: Record<string, string> = {
-  'Ground': 'GROUND hancurkan baja (STEEL) & tiang listrik (ELECTRIC)!',
-  'Dark': 'DARK sukses meneror hantu (GHOST) & merusak mental (PSYCHIC)!',
-  'Fire': 'FIRE membakar habis alam (GRASS/BUG/ICE) & melelehkan besi (STEEL)!',
-  'Steel': 'STEEL itu senjata tajam pemotong ICE & ROCK, serta menebas peri (FAIRY)!',
-  'Ghost': 'GHOST bisa leluasa meneror sesama hantu (GHOST) & merusak mental (PSYCHIC)!',
-  'Grass': 'GRASS akarnya menjebol batu/tanah (ROCK/GROUND) & menyerap air (WATER)!',
-  'Water': 'WATER memadamkan kobaran FIRE & mengikis tanah/batu (GROUND/ROCK)!',
-  'Dragon': 'DRAGON itu monster legendaris yang hanya bisa ditumbangkan sesama DRAGON!',
-  'Rock': 'ROCK batunya menjatuhkan burung (FLYING), meremukkan BUG, dan memadamkan FIRE!',
-  'Psychic': 'PSYCHIC mengontrol fisik petarung (FIGHTING) & menetralisir racun (POISON)!',
-  'Electric': 'ELECTRIC paling cepat menyengat burung di langit (FLYING) & air (WATER)! Setruman super dobel (4x) bagi tipe kombinasi keduanya!',
-  'Fairy': 'FAIRY adalah sihir suci penakluk naga (DRAGON), petarung (FIGHTING) & kegelapan (DARK)!',
-  'Ice': 'ICE membekukan reptil (DRAGON), sayap burung (FLYING), rumput (GRASS), & tanah (GROUND)!',
-  'Fighting': 'FIGHTING bisa menghancurkan benda padat (ICE/ROCK/STEEL) & menghajar kejahatan (DARK)!',
-  'Poison': 'POISON merusak kesucian peri (FAIRY) & mematikan tanaman (GRASS)!',
-  'Flying': 'FLYING adalah predator bagi serangga (BUG) & tanaman (GRASS)!',
-  'Bug': 'BUG merusak tumbuhan (GRASS), menggigit pikiran (PSYCHIC), dan membasmi kejahatan (DARK)!'
+  'Steel': 'STEEL itu senjata tajam 💥pemotong ICE & ROCK, serta 💥menebas peri FAIRY!',
+  'Ground': 'GROUND 💥menghancurkan baja STEEL & tiang listrik ELECTRIC, serta 💥mengubur FIRE, ROCK, dan POISON!',
+  'Flying': 'FLYING adalah predator terbang yang 💥memangsa serangga BUG & tanaman GRASS!',
+  'Ghost': 'GHOST bisa leluasa 💥meneror sesama hantu GHOST & 💥merusak mental PSYCHIC!',
+  'Dark': 'DARK sukses 💥meneror hantu GHOST & 💥merusak mental kompetitif PSYCHIC!',
+  'Fairy': 'FAIRY adalah sihir suci 💥penakluk naga DRAGON, petarung FIGHTING & kegelapan DARK!',
+  'Fire': 'FIRE 💥membakar habis alam GRASS, BUG, ICE & 💥melelehkan pelindung besi STEEL!',
+  'Water': 'WATER 💥memadamkan kobaran FIRE & 💥mengikis hancur tanah GROUND atau batuan ROCK!',
+  'Grass': 'GRASS akarnya 💥menjebol batu ROCK, tanah GROUND & 💥menyerap habis energi air WATER!',
+  'Electric': 'ELECTRIC paling cepat 💥menyengat burung di langit FLYING & air WATER! Setruman super dobel (4x) bagi kombinasi keduanya!',
+  'Dragon': 'DRAGON itu monster legendaris yang hanya bisa 💥ditumbangkan oleh sesama kekuatan purba DRAGON!',
+  'Ice': 'ICE 💥membekukan reptil DRAGON, sayap burung FLYING, rumput GRASS, & tanah GROUND!',
+  'Fighting': 'FIGHTING bisa 💥menghancurkan benda padat ICE, ROCK, STEEL, NORMAL & 💥menghajar kejahatan DARK!',
+  'Psychic': 'PSYCHIC 💥mengontrol disiplin fisik petarung FIGHTING & 💥menetralisir cairan beracun POISON!',
+  'Rock': 'ROCK batunya 💥menjatuhkan burung FLYING, 💥meremukkan BUG, dan 💥memadamkan kobaran FIRE atau ICE!',
+  'Poison': 'POISON 💥merusak kesucian peri FAIRY & 💥mematikan jaringan sel tanaman GRASS!',
+  'Normal': 'NORMAL 🧪tidak memiliki keunggulan elemen (💥) terhadap tipe apa pun. Fokus murni pada raw damage output!',
+  'Bug': 'BUG 💥merusak jaringan tumbuhan GRASS, 💥menggigit pikiran PSYCHIC, dan 💥membasmi kejahatan DARK!'
 };
+
+// ==========================================
+// 3. KAMUS DEFENSIF (PIVOT ABSORBER)
+// ==========================================
+export const DEFENSE_STORY_GUIDE: Record<string, string> = {
+  'Steel': 'Tameng besi STEEL 🛡️menahan 10 tipe elemen berbeda dan 🚫kebal total dari cairan limbah beracun POISON!',
+  'Ground': 'Bumi GROUND 🚫kebal dari aliran listrik ELECTRIC, serta 🛡️meredam ledakan pasir ROCK dan racun POISON!',
+  'Flying': 'Burung FLYING bebas terbang tinggi sehingga 🚫kebal dari gempa bumi GROUND, serta 🛡️menahan serangan BUG, FIGHTING, GRASS!',
+  'Ghost': 'Dimensi gaib GHOST 🚫kebal total dari fisik NORMAL dan otot FIGHTING, serta 🛡️menahan racun POISON dan gigitan BUG!',
+  'Dark': 'Sisi gelap DARK 🚫kebal dari manipulasi otak PSYCHIC, serta 🛡️menahan teror mistis GHOST dan sesama penjahat DARK!',
+  'Fairy': 'Sihir suci FAIRY 🚫kebal total dari amukan naga DRAGON, serta 🛡️meredam pukulan FIGHTING, BUG, dan kegelapan DARK!',
+  'Fire': 'Kobaran FIRE 🛡️menahan hawa beku ICE, tebasan STEEL, sihir FAIRY, gigitan BUG, tumbuhan GRASS, dan sesama kobaran api FIRE!',
+  'Water': 'Aliran air WATER 🛡️meredam ledakan api FIRE, menghentikan beku ICE, menahan tebasan STEEL, dan sesama siraman air WATER!',
+  'Grass': 'Tanaman GRASS 🛡️menyerap aliran sengatan ELECTRIC, menyedot air WATER, menahan guncangan GROUND, dan sesama tumbuhan GRASS!',
+  'Electric': 'Daya ELECTRIC 🛡️menahan sengatan sesama petir ELECTRIC, menepis sayap terbang FLYING, dan meredam ketukan besi STEEL!',
+  'Dragon': 'Sisik naga DRAGON 🛡️menahan empat elemen dasar alam sekaligus yaitu FIRE, WATER, GRASS, dan sengatan listrik ELECTRIC!',
+  'Ice': 'Lapisan es ICE sangat rapuh dan 🛡️hanya bisa menahan dinginnya sisa serangan dari sesama udara beku ICE!',
+  'Fighting': 'Disiplin bela diri FIGHTING 🛡️menahan lemparan batuan ROCK, gigitan serangga BUG, dan taktik kotor penjahat DARK!',
+  'Psychic': 'Kekuatan mental PSYCHIC 🛡️membaca gerakan pukulan petarung FIGHTING dan meredam sesama gelombang pikiran PSYCHIC!',
+  'Rock': 'Struktur batuan ROCK 🛡️menahan hantaman fisik NORMAL, kobaran api FIRE, racun POISON, dan patukan burung FLYING!',
+  'Poison': 'Tubuh beracun POISON 🛡️menahan pukulan bela diri FIGHTING, gigitan BUG, tumbuhan GRASS, sihir FAIRY, dan sesama racun POISON!',
+  'Normal': 'Tubuh polos NORMAL 🚫kebal dari dimensi spiritual hantu GHOST, tetapi 🧪lemah dihantam oleh disiplin bela diri FIGHTING!',
+  'Bug': 'Tubuh serangga BUG 🛡️meredam pukulan otot petarung FIGHTING, guncangan tanah GROUND, dan jeratan tanaman GRASS!'
+};
+
+// ==========================================
+// 4. SUSUNAN OPTIMAL TIERING MASTER VGC LINTAS TAB
+// ==========================================
+export const VGC_META_POPULARITY_ORDER = [
+  'Steel', 'Ground', 'Flying', 'Ghost', 'Dark', 'Fairy', 
+  'Fire', 'Water', 'Grass', 'Electric', 
+  'Dragon', 'Ice', 'Fighting', 
+  'Psychic', 'Rock', 'Poison', 'Normal', 'Bug'
+];
 
 export const POKEMON_TYPE_THEMES: Record<string, { bg: string; text: string; border: string; glow: string }> = {
   GROUND: { bg: 'bg-amber-950/40', text: 'text-amber-500', border: 'border-amber-700/30', glow: 'shadow-amber-500/5' },
