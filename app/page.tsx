@@ -18,6 +18,10 @@ export default function VgcReviewTrainer() {
   const [bestScore, setBestScore] = useState(0);
   const [bestTime, setBestTime] = useState(0);
   
+  // Hint Logic States
+  const [timeForQuestion, setTimeForQuestion] = useState(0);
+  const [eliminatedIndices, setEliminatedIndices] = useState<number[]>([]);
+
   const [gameActive, setGameActive] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [log, setLog] = useState('Select parameters to initialize match...');
@@ -31,18 +35,45 @@ export default function VgcReviewTrainer() {
     if (savedTime) setBestTime(parseInt(savedTime, 10));
   }, []);
 
+  // Stopwatch global + Pemicu Hint per Soal
   useEffect(() => {
     if (gameActive && !loading && !isFinished) {
       stopwatchRef.current = setInterval(() => {
         setTimeElapsed((prev) => prev + 1);
+        
+        // Hanya hitung waktu jika pertanyaan aktif belum dijawab
+        if (!history[currentIdx]) {
+          setTimeForQuestion((prev) => {
+            const nextTime = prev + 1;
+            if (nextTime === 10) {
+              triggerHint();
+            }
+            return nextTime;
+          });
+        }
       }, 1000);
     }
     return () => {
       if (stopwatchRef.current) clearInterval(stopwatchRef.current);
     };
-  }, [gameActive, loading, isFinished]);
+  }, [gameActive, loading, isFinished, currentIdx, history]);
 
-  // Pure mathematical helper to compute defensive interactions
+  // Fungsi untuk mengeliminasi 2 opsi yang salah sebagai Hint
+  const triggerHint = () => {
+    const currentQuestion = scenarios[currentIdx];
+    if (!currentQuestion) return;
+
+    const wrongIndices: number[] = [];
+    currentQuestion.options.forEach((opt: any, idx: number) => {
+      if (!opt.isCorrect) wrongIndices.push(idx);
+    });
+
+    // Acak dan ambil 2 indeks jawaban yang salah untuk dieliminasi
+    const toEliminate = wrongIndices.sort(() => Math.random() - 0.5).slice(0, 2);
+    setEliminatedIndices(toEliminate);
+    setLog('💡 HINT ACTIVATED: 2 wrong answers eliminated due to time limit!');
+  };
+
   const getEffectiveness = (attackType: string, defenderTypes: string[]) => {
     let finalMult = 1;
     
@@ -63,13 +94,14 @@ export default function VgcReviewTrainer() {
   const startDrillSession = async (questionCount: number) => {
     setLoading(true);
     setTimeElapsed(0);
+    setTimeForQuestion(0);
+    setEliminatedIndices([]);
     setHistory({});
     setScore(0);
     setCurrentIdx(0);
     try {
       const compiled = [];
 
-      // Generate random dual combinations for PIVOT scenarios
       const dualCombosSet = new Set<string>();
       while (dualCombosSet.size < 100) {
         const t1 = INDIVIDUAL_TYPES[Math.floor(Math.random() * INDIVIDUAL_TYPES.length)];
@@ -103,7 +135,6 @@ export default function VgcReviewTrainer() {
         const wrongChoices: string[] = [];
 
         if (chosenMode === 'pivot') {
-          // --- PIVOT MODE: Find a Dual-Type Defender that resists (< 1x) ---
           dynamicDualCombos.forEach(dualTypes => {
             const [type1, type2] = dualTypes;
             let mult1 = 1;
@@ -120,10 +151,8 @@ export default function VgcReviewTrainer() {
             else wrongChoices.push(dualTypes.join(' / '));
           });
         } else {
-          // --- HIT WEAKNESS MODE: Find Single Attacking Type that hits the enemy for 2x or 4x ---
           INDIVIDUAL_TYPES.forEach(attackType => {
             const totalDamageMult = getEffectiveness(attackType, pokemonFetchedTypes);
-            
             if (totalDamageMult >= 2) {
               correctChoices.push(`${attackType.toUpperCase()} MOVE`);
             } else {
@@ -132,14 +161,11 @@ export default function VgcReviewTrainer() {
           });
         }
 
-        // Safeguard fallbacks
         if (correctChoices.length === 0) {
-          correctChoices.push(chosenMode === 'pivot' ? 'Steel / Flying' : 'EARTHQUAKE (GROUND)');
+          correctChoices.push(chosenMode === 'pivot' ? 'Steel / Flying' : 'Fairy MOVE');
         }
 
         const chosenCorrectText = correctChoices[Math.floor(Math.random() * correctChoices.length)];
-        
-        // Remove duplicates from wrongChoices array pool natively
         const uniqueWrongChoices = Array.from(new Set(wrongChoices)).filter(c => c !== chosenCorrectText);
         const selectedWrongTexts = uniqueWrongChoices.sort(() => Math.random() - 0.5).slice(0, 3);
 
@@ -148,7 +174,15 @@ export default function VgcReviewTrainer() {
           ...selectedWrongTexts.map(text => ({ text, isCorrect: false }))
         ].sort(() => Math.random() - 0.5);
 
-        const cleanName = data.name.split('-')[0].toUpperCase();
+        const cleanName = data.name
+          .replace('-paldea-blaze-breed', ' (PALDEA-FIRE)')
+          .replace('-paldea-aqua-breed', ' (PALDEA-WATER)')
+          .replace('-alola', ' (ALOLA)')
+          .replace('-hisui', ' (HISUI)')
+          .replace('-wash', '-WASH')
+          .replace('-heat', '-HEAT')
+          .replace('-zero', '')
+          .toUpperCase();
 
         compiled.push({
           name: cleanName,
@@ -164,7 +198,7 @@ export default function VgcReviewTrainer() {
       setScenarios(compiled);
       setTotalQuestions(questionCount);
       setGameActive(true);
-      setLog('Drill parameters configured successfully.');
+      setLog('Drill parameters configured successfully. Go!');
       setLoading(false);
     } catch (err) {
       console.error(err);
@@ -179,9 +213,9 @@ export default function VgcReviewTrainer() {
 
     if (isCorrect) {
       setScore(s => s + 1);
-      setLog(q.mode === 'pivot' ? '🎯 SECURE PIVOT! Clean structural switch layout.' : '💥 SUPER EFFECTIVE! You completely exploited their defensive profile.');
+      setLog(q.mode === 'pivot' ? '🎯 SECURE PIVOT! Clean structural switch.' : '💥 SUPER EFFECTIVE! Matchup exploit successful.');
     } else {
-      setLog('❌ STRATEGY FAULT! Matchup calculation values failed parameters.');
+      setLog('❌ STRATEGY FAULT! This typing selection takes fatal damage.');
     }
   };
 
@@ -190,6 +224,9 @@ export default function VgcReviewTrainer() {
     
     if (currentIdx < totalQuestions - 1) {
       setCurrentIdx(prev => prev + 1);
+      // Reset timer pertanyaan dan hint untuk soal berikutnya
+      setTimeForQuestion(0);
+      setEliminatedIndices([]);
       setLog(history[currentIdx + 1] ? 'Reviewing historic parameters...' : 'Awaiting manual entry inputs...');
     } else {
       setGameActive(false);
@@ -211,6 +248,8 @@ export default function VgcReviewTrainer() {
   const navigateBack = () => {
     if (currentIdx > 0) {
       setCurrentIdx(prev => prev - 1);
+      // Bersihkan hint state karena melihat kembali soal lama
+      setEliminatedIndices([]);
       setLog('Reviewing historic parameters...');
     }
   };
@@ -219,6 +258,8 @@ export default function VgcReviewTrainer() {
     setCurrentIdx(0);
     setScore(0);
     setTimeElapsed(0);
+    setTimeForQuestion(0);
+    setEliminatedIndices([]);
     setHistory({});
     setGameActive(false);
     setIsFinished(false);
@@ -237,7 +278,7 @@ export default function VgcReviewTrainer() {
 
           <h1 className="text-2xl font-black tracking-wider text-white mb-1">VGC STRATEGY DRILL</h1>
           <p className="text-xs font-mono text-neutral-400 mb-8 leading-relaxed">
-            Configure system queue constraints. Pivot parameters will check dual-type resistances. Weakness checks require finding an active super-effective attacking type.
+            Configure queue constraints. You have a 10s automatic response hint window before 2 wrong answers clear out.
           </p>
 
           <div className="space-y-3 font-mono">
@@ -245,7 +286,7 @@ export default function VgcReviewTrainer() {
               <button
                 key={count}
                 onClick={() => startDrillSession(count)}
-                className="w-full py-3.5 bg-zinc-950 hover:bg-neutral-800 border border-neutral-800 rounded-xl text-xs font-black tracking-widest transition-all text-zinc-400 hover:text-white uppercase animate-fade"
+                className="w-full py-3.5 bg-zinc-950 hover:bg-neutral-800 border border-neutral-800 rounded-xl text-xs font-black tracking-widest transition-all text-zinc-400 hover:text-white uppercase"
               >
                 ⚡ Start {count} Questions Queue
               </button>
@@ -273,17 +314,22 @@ export default function VgcReviewTrainer() {
     <div className="min-h-screen bg-zinc-950 text-zinc-200 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-xl bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-2xl relative">
         
-        {/* TOP CLOCK AND STATS BAR */}
+        {/* TIMER BAR */}
         <div className="bg-neutral-950 px-4 py-3 border-b border-neutral-800 flex justify-between items-center font-mono text-[11px] tracking-wide text-neutral-400">
           <div className="flex items-center gap-3">
             <span className="px-2 py-0.5 bg-zinc-800 text-zinc-200 rounded font-bold">⏱️ {timeElapsed}s</span>
             <span>QUEUE: <b className="text-white">{currentIdx + 1}/{totalQuestions}</b></span>
             <span>SCORE: <b className="text-white">{score}</b></span>
+            {!hasAnswedThisOne && (
+              <span className="text-[10px] text-amber-400 animate-pulse">
+                ⏳ Hint in: {Math.max(0, 10 - timeForQuestion)}s
+              </span>
+            )}
           </div>
           <div>🏆 RECORD: <b className="text-amber-400">{bestScore} PTS ({bestTime}s)</b></div>
         </div>
 
-        {/* FIELD COMBAT HEADER VIEW */}
+        {/* COMBAT HEADER */}
         <div className="p-6 bg-gradient-to-b from-neutral-900 to-zinc-950 border-b border-neutral-800 flex flex-col items-center relative">
           <span className="absolute top-4 left-4 text-[9px] font-mono tracking-wider px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700/40 uppercase">
             {q.archetype}
@@ -305,12 +351,12 @@ export default function VgcReviewTrainer() {
           </div>
         </div>
 
-        {/* CONTEXT SCREEN INSTRUCTIONS */}
+        {/* CONTEXT REPORT */}
         <div className="p-4 bg-black/40 text-sm border-b border-neutral-800/60 text-amber-200 font-mono leading-relaxed">
           {q.mode === 'pivot' ? (
             <p>&gt; Opponent's <span className="text-white font-bold">{q.name}</span> threatens a STAB <span className="text-white font-black underline decoration-amber-500/50">{q.moveType?.toUpperCase()}</span> hit! Select a dual-type combo that safely **RESISTS/ABSORBS** it:</p>
           ) : (
-            <p>&gt; Target threat <span className="text-white font-bold">{q.name}</span> (<span className="text-neutral-400">{q.types.join(' / ')}</span>) is active on the field! Select a **SINGLE TYPE MOVE** that scores super-effective ($2\times$ or $4\times$) damage:</p>
+            <p>&gt; Target threat <span className="text-white font-bold">{q.name}</span> (<span className="text-neutral-400">{q.types.join(' / ')}</span>) is active! Select a **SINGLE TYPE MOVE** that scores super-effective ($2\times$ or $4\times$) damage:</p>
           )}
         </div>
 
@@ -318,22 +364,27 @@ export default function VgcReviewTrainer() {
         <div className="p-4 grid grid-cols-2 gap-3">
           {q.options?.map((opt: any, idx: number) => {
             const hasChosenThisOption = currentAnswerState?.selectedIdx === idx;
+            const isEliminated = eliminatedIndices.includes(idx);
+            
             let style = "bg-zinc-950 border-neutral-800 text-neutral-300 hover:bg-neutral-800";
             
             if (hasAnswedThisOne || isFinished) {
               if (opt.isCorrect) style = "bg-emerald-950 text-emerald-400 border-emerald-600 font-bold shadow-[0_0_10px_rgba(16,185,129,0.1)]";
               else if (hasChosenThisOption) style = "bg-rose-950 text-rose-400 border-rose-600 font-bold";
               else style = "bg-zinc-950/20 text-zinc-600 border-zinc-900 opacity-20";
+            } else if (isEliminated) {
+              // Menyembunyikan jawaban yang tereliminasi oleh hint
+              style = "bg-zinc-900/30 text-zinc-700/40 border-zinc-950/40 opacity-20 pointer-events-none line-through";
             }
 
             return (
               <button
                 key={idx}
-                disabled={hasAnswedThisOne || isFinished}
+                disabled={hasAnswedThisOne || isFinished || isEliminated}
                 onClick={() => handleTurnCommit(idx, opt.isCorrect)}
                 className={`w-full py-4 px-2 text-center rounded-xl text-xs border tracking-wider font-mono transition-all font-black uppercase active:scale-98 ${style}`}
               >
-                {opt.text}
+                {isEliminated ? "---" : opt.text}
               </button>
             );
           })}
